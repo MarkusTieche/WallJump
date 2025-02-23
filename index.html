@@ -1,0 +1,159 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>AI Game</title>
+  <meta name="viewport" content="width=device-width,user-scalable=no">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="init()">
+  <?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.3.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 -1240 768 1280" style="enable-background:new 0 0 768 1280;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#999999;}
+	.st1{fill:#C2C2C2;}
+	.st2{display:none;}
+	.st3{display:inline;}
+	.st4{display:inline;fill:#F2F2F2;}
+	.st5{fill:#F14950;}
+	.st6{fill:#29ABE2;stroke:#A67C52;stroke-width:6;stroke-miterlimit:10;}
+	.st7{fill:#A67C52;}
+	.st8{fill:#C69C6D;}
+	.st9{fill:#B3B3B3;}
+	.st10{fill:#E6E6E6;}
+	.st11{fill:#C2C2CC;}
+	.st12{fill:#A4A3B2;}
+	.st13{fill:none;stroke:#808080;stroke-width:6;stroke-miterlimit:10;}
+	.st14{fill:#DA7D81;}
+	.st15{fill:#C8C19E;}
+	.st16{fill:#BAEAC4;}
+	.st17{fill:#ACACC8;}
+	.st18{fill:#E6A9AB;}
+	.st19{fill:#A35E61;}
+	.st20{fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:10;}
+	.st21{fill:#ED1C24;}
+	.st22{fill:#F2F2F2;}
+	.st23{display:inline;fill:#1A1A1A;}
+	.heavy { font: bold 40px sans-serif;fill:black;}
+</style>
+<pattern id="pattern-checkers" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+    <!-- Two instances of the same checker, only positioned apart on the `x` and `y` axis -->
+    <!-- We will define the `fill` in the CSS for flexible use -->
+    <rect class="checker" x="0" width="16" height="16" y="0"></rect>
+    <rect class="checker" x="16" width="16" height="16" y="0" fill="white"></rect>
+    <rect class="checker" x="16" width="16" height="16" y="16"></rect>
+    <rect class="checker" x="0" width="16" height="16" y="16" fill="white"></rect>
+</pattern>
+<pattern id="diagonalHatch" width="10" height="10" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+  	<line x1="0" y1="0" x2="0" y2="10" style="stroke:black; stroke-width:10" />
+</pattern>
+<g id="Level">
+	<text id="labelLevel" x="50%" y="-200" dominant-baseline="middle" text-anchor="middle" class="heavy">LEVEL 1</text>
+	<g id="ground">
+		<rect id="g2" x="-247" y="-8" class="st0" width="1262" height="84"/>
+		<rect id="g1" x="-247" y="-8" class="st1" width="1262" height="17"/>
+	</g>
+	<rect id="highScoreLine" x="-116" y="-9.5"  width="1000" height="20" fill="url(#diagonalHatch)"/>
+	<rect id="goal" x="-116" y="-33" width="1000" height="67" fill="url(#pattern-checkers)"/>
+</g>
+<g id="Assets" class="st2">
+	<g id="Player">
+		<path id="PlayerBody" class="st3" d="M37.9,49h-75.8C-44,49-49,44-49,37.9v-75.8C-49-44-44-49-37.9-49h75.8C44-49,49-44,49-37.9
+			v75.8C49,44,44,49,37.9,49z"/>
+		<circle class="st4" cx="-22.5" cy="-15.5" r="20.5"/>
+		<circle class="st4" cx="22.5" cy="-15.5" r="20.5"/>
+	</g>
+	<g id="wall" class="st3">
+		<rect id="wall_x5F_R" x="-177" y="-1280" class="st5" width="354" height="1280"/>
+		<g id="window">
+			<rect x="-73" y="-1066" class="st6" width="146" height="208"/>
+			<rect x="-5" y="-1066" class="st7" width="10" height="208"/>
+			<rect x="-5" y="-1033" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 -962 -962)" class="st7" width="10" height="142"/>
+			<rect x="-7" y="-932" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 -851 -851)" class="st8" width="14" height="162"/>
+		</g>
+		<g id="window_1_">
+			<rect x="-73" y="-744" class="st6" width="146" height="208"/>
+			<rect x="-5" y="-744" class="st7" width="10" height="208"/>
+			<rect x="-5" y="-711" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 -640 -640)" class="st7" width="10" height="142"/>
+			<rect x="-7" y="-610" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 -529 -529)" class="st8" width="14" height="162"/>
+		</g>
+		<g id="window_2_">
+			<rect x="-73" y="-422" class="st6" width="146" height="208"/>
+			<rect x="-5" y="-422" class="st7" width="10" height="208"/>
+			<rect x="-5" y="-389" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 -318 -318)" class="st7" width="10" height="142"/>
+			<rect x="-7" y="-288" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 -207 -207)" class="st8" width="14" height="162"/>
+		</g>
+		<path class="st9" d="M0-1280h-221v21c18.8,0.3,34,15.6,34,34.5c0,0.2,0,0.3,0,0.5H0h187c0-0.2,0-0.3,0-0.5
+			c0-18.9,15.2-34.2,34-34.5v-21H0z"/>
+		<rect x="-221" y="-1280" class="st10" width="442" height="21"/>
+	</g>
+	<g id="Spike" class="st3">
+		<polygon id="Spike_2" class="st11" points="-38,0 -38,-43 -0.5,-21.5 37,0 -0.5,21.5 -38,43 		"/>
+		<polygon id="Spike_1_" class="st12" points="37,0 -0.5,21.5 -38,43 -38,0 		"/>
+	</g>
+	<g id="BG_2" class="st3">
+		<path class="st13" d="M47-107.8C174-18,584.5,25,755-25"/>
+		<path class="st13" d="M47,40c112.9,10,556.2-29.8,673.9-168"/>
+	</g>
+	<g id="BG_1" class="st3">
+		<path id="BG" class="st13" d="M85-81c94,61,361,91,614.7,0"/>
+		<polygon class="st14" points="381.2,80 337,80 337,-15 401,-15 401,42.8 		"/>
+		<rect x="564" y="-39" transform="matrix(0.9868 -0.1617 0.1617 0.9868 6.4724 96.5083)" class="st15" width="64" height="95"/>
+		<rect x="117" y="-44" transform="matrix(0.9603 0.2791 -0.2791 0.9603 6.8993 -41.4516)" class="st16" width="64" height="95"/>
+		<polygon class="st17" points="320.5,0.3 294.3,-18.3 294.3,-18.8 230.6,-24.8 230.5,-24.3 201.3,-10.8 210.1,8.2 228.3,-0.1 
+			221.7,69.8 285.4,75.8 292,5.8 308.4,17.5 		"/>
+		<polygon class="st18" points="423.3,0.3 449.6,-18.3 449.5,-18.8 513.3,-24.8 513.3,-24.2 542.5,-10.8 533.8,8.3 515.6,-0.1 
+			522.1,69.8 458.4,75.8 451.8,5.8 435.5,17.5 		"/>
+		<rect x="560" y="-48" transform="matrix(0.9868 -0.1617 0.1617 0.9868 13.7205 90.5455)" class="st7" width="6" height="18"/>
+		<rect x="610" y="-57" transform="matrix(0.9868 -0.1617 0.1617 0.9868 15.8345 98.5139)" class="st7" width="6" height="18"/>
+		<rect x="503" y="-39" transform="matrix(0.9949 -0.1008 0.1008 0.9949 5.6014 50.853)" class="st7" width="6" height="18"/>
+		<rect x="453" y="-34" transform="matrix(0.9949 -0.1008 0.1008 0.9949 4.8427 45.8384)" class="st7" width="6" height="18"/>
+		<rect x="341" y="-30" class="st7" width="6" height="18"/>
+		<rect x="392" y="-30" class="st7" width="6" height="18"/>
+		<rect x="287" y="-34" transform="matrix(0.9838 0.1792 -0.1792 0.9838 0.2153 -52.3833)" class="st7" width="6" height="18"/>
+		<rect x="234" y="-39" class="st7" width="6" height="18"/>
+		<rect x="184" y="-48" transform="matrix(0.9603 0.2791 -0.2791 0.9603 -3.4534 -53.748)" class="st7" width="6" height="18"/>
+		<rect x="136" y="-62" transform="matrix(0.9603 0.2791 -0.2791 0.9603 -9.2691 -40.9061)" class="st7" width="6" height="18"/>
+		<polygon class="st19" points="383,49 401,43 381,80 		"/>
+	</g>
+	<g id="BG_3" class="st3">
+		<path class="st20" d="M439,58c0,0,0.4-71.8,18-70"/>
+		<path class="st13" d="M47-107.8C174-18,584.5,25,755-25"/>
+		<g id="shoe">
+			<polygon class="st21" points="483.9,42.3 464,27.2 471.8,16.9 488.6,29.5 			"/>
+			<path class="st21" d="M496,50.5l-29-27.2l-10.9,14.4l37.5,28.3l3.3-4.4C499.5,58.2,499.1,53.4,496,50.5z"/>
+			
+				<rect x="450.2" y="51.4" transform="matrix(0.7977 0.603 -0.603 0.7977 127.9897 -274.8283)" class="st22" width="47" height="4"/>
+		</g>
+		<g id="shoe_1_">
+			<polygon class="st21" points="443.6,83.9 450.9,59.9 438.4,56.1 432.3,76.2 			"/>
+			<path class="st21" d="M438.5,97.5l7.5-39.1l17.2,5.3l-13.7,44.9l-5.3-1.6C440.2,105.8,437.7,101.7,438.5,97.5z"/>
+			
+				<rect x="434.8" y="84.8" transform="matrix(-0.2922 0.9564 -0.9564 -0.2922 675.2667 -326.1746)" class="st22" width="47" height="4"/>
+		</g>
+		<path class="st20" d="M457-12c10,1,15,32,15,32"/>
+	</g>
+</g>
+</svg>
+
+
+	<!-- <div id="inputDiv"></div> -->
+	<div id="GUI">
+		<h3 id="Highscore" style="line-height: 10px;">Best: 0</h3>
+		<h2 id="Score" style="line-height: 10px;">00000</h2>
+		<div style="position: absolute; top:0px; right:10px; text-align: left; line-height: 5px; width:100px;background:rgba(0,0,0,0.5);margin:5px;padding:5px;border-radius: 5px;color:white;">
+			<p id="Generation" style="font-weight: 900;">Genreation:1</p>
+			<p id="labelPlayers" style="font-weight: 900;">Players:</p>
+			<p id="labelAlive" style="font-weight: 900;">Alive:</p>
+		</div>
+	</div>
+</body>
+<script src="levelPart.js"></script>
+<script src="player.js"></script>
+<script src="script.js"></script>
+</html>

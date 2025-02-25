@@ -159,7 +159,6 @@ function render(time)
     }
 
     scoreLabel.innerHTML = Math.floor(score);
-    labelAlive.innerHTML = "Alive:"+(players.length-deadPlayers);
     
     //UPDATE CAMERA
     camera.velocity.y = (camera.target.position.y-camera.position.y-camera.targetOffset.y)/(2);

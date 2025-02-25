@@ -37,7 +37,7 @@ class Player{
     move(DirectionX)
     {
         this.velocity.y  =-20;
-        this.velocity.x  =25*DirectionX*(this.onWall);
+        this.velocity.x  =25*DirectionX;
     }
 
 
@@ -54,10 +54,6 @@ class Player{
         this.position.x = Math.min(Math.max(this.position.x, 768/2-230), 768/2+230);
         this.position.y += this.velocity.y*dt;
 
-        if(this.position.y = -this.halfSize)
-            {
-                console.log("dd")
-            }
 
         if(this.position.x <= 768/2-230 || this.position.x >= 768/2+230)
         {

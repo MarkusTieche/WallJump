@@ -5,7 +5,7 @@ var viewBox = svg.viewBox.baseVal;
 
 var camera = document.getElementById("Level");
     camera.velocity = {x:0,y:0};
-    camera.position = {x:0,y:0};
+    camera.position = {x:0,y:-100};
     camera.targetOffset = {x:viewBox.width/2,y:-100};
 
 var highScoreLabel = document.getElementById("Highscore");
@@ -46,13 +46,6 @@ function resetLevel()
     currentLevel++;
     document.getElementById("labelLevel").innerHTML ="LEVEL "+currentLevel;
     highScore = 0;
-    highScoreLabel.innerHTML = "Best: "+highScore*-1;
-    highScoreLine.setAttribute("transform","translate(0,"+(100)+")");
-
-    for (let i = 0; i < players.length; i++)
-    {
-        players[i].reset({x:768/2-100+Math.random()*200,y:0},players[i].brain)
-    }
 
     for (let levelPart of level) 
     {
@@ -63,12 +56,7 @@ function resetLevel()
     }
     level = [];
     createLevel(100);
-
-    camera.velocity.y = 0;
-    camera.velocity.x = 0;
-    camera.position.y = 0;
-    camera.position.x = 0;
-    camera.setAttribute("transform","translate("+(-camera.position.x)+","+(-camera.position.y)+")");
+    restartLevel();
 }
 
 function createLevel(PartCount)
@@ -102,10 +90,17 @@ function restartLevel()
         players[i].reset({x:768/2,y:0})
     } 
 
-    camera.velocity.y = 0;
-    camera.velocity.x = 0;
-    camera.position.y = 0;
-    camera.position.x = 0;
+    camera.position = {x:0,y:-100};
+}
+
+function setCamera(target)
+{
+    camera.velocity.y = (target.y-camera.position.y-camera.targetOffset.y)/(2);
+    camera.velocity.x = ((target.x-camera.position.x-camera.targetOffset.x))/4;
+    camera.position.y += ( Math.min(camera.position.y + camera.velocity.y*dt,20)-camera.position.y)/10;
+    camera.position.x +=   (camera.velocity.x-camera.position.x)/10;
+    
+        
     camera.setAttribute("transform","translate("+(-camera.position.x)+","+(-camera.position.y)+")");
 }
 
@@ -179,12 +174,8 @@ function render(time)
     scoreLabel.innerHTML = Math.floor(score);
     
     //UPDATE CAMERA
-    camera.velocity.y = (camera.target.position.y-camera.position.y-camera.targetOffset.y)/(2);
-    camera.velocity.x = ((camera.target.position.x-camera.position.x-camera.targetOffset.x))/4;
-    camera.position.y += ( Math.min(camera.position.y + camera.velocity.y*dt,20)-camera.position.y)/10;
-    camera.position.x +=   (camera.velocity.x-camera.position.x)/10;
-    camera.setAttribute("transform","translate("+(-camera.position.x)+","+(-camera.position.y)+")");
-
+    setCamera(camera.target.position)
+    
     //UPDATE LEVEL
     for (let i = 0; i < level.length; i++) 
     {

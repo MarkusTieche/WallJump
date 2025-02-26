@@ -93,7 +93,7 @@ function restartLevel()
         players[i].reset({x:768/2,y:0})
     } 
 
-    camera.position = {x:0,y:-100};
+    camera.position = {x:0,y:camera.targetOffset.y};
 }
 
 function setCamera(target)

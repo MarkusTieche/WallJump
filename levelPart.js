@@ -78,9 +78,9 @@ class LevelPart{
     isVisible()
     {
         //console.log((this.position.y-camera.position.y-1200)>1500)
-        if((this.position.y-camera.position.y)>-1500)
+        if((this.position.y-camera.position.y)>-1600)
         {this.show()};
-        if((this.position.y-camera.position.y)>1500)
+        if((this.position.y-camera.position.y)>1600)
         {
             this.hide()
         }

@@ -53,5 +53,5 @@ svg
     user-select: none;
     max-width: 760px;
     margin:auto;
-    background-color:aqua;
+    background: linear-gradient(0deg, rgb(30, 30, 214) -100%, rgba(0,146,255,1) 100%);
 }

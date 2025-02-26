@@ -26,7 +26,7 @@ var currentLevel = 1;
 function init()
 {
     for (let i = 0; i < playerCount; i++) {
-        addPlayer({x:768/2,y:0});
+        addPlayer({x:768/2,y:0},i,("#"+Math.floor(Math.random()*16777215).toString(16)));
     }
 
     highScoreLine =  document.getElementById("highScoreLine");
@@ -70,9 +70,9 @@ function createLevel(PartCount)
     }
 }
 
-function addPlayer(Position)
+function addPlayer(Position,index,Color)
 {
-    var player = new Player(Position,players.length);
+    var player = new Player(Position,index,Color);
     players.push(player);
     document.getElementById("Level").appendChild(player.body);
 }

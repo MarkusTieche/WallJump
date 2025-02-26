@@ -1,12 +1,11 @@
 class Player{
   
-    constructor(Position,Index) 
+    constructor(Position,Index,Color) 
     {
         this.gravity = 1.5;
         this.halfSize = 98/2;
-        this.onWall = 0;
         this.body = document.getElementById("Player").cloneNode(true);
-        this.body.setAttribute("fill", "#"+Math.floor(Math.random()*16777215).toString(16));//RANDOM COLOR1
+        this.body.setAttribute("fill", Color);//RANDOM COLOR1
         this.eyes = this.body.getElementsByTagName('circle');
         this.eyesPosition = {"leftX":Number(this.eyes[0].getAttribute("cx")),"rightX":Number(this.eyes[1].getAttribute("cx"))};
         this.index = Index;

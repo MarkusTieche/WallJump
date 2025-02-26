@@ -150,15 +150,15 @@ function render(time)
     var deadPlayers = 0;
     var topHeight = 0;
     for (let i = 0; i < players.length; i++) {
+        players[i].update();
+        
         if(players[i].alive)
         {
-            players[i].update();
-            
             //COLLISION
             if(level[players[i].getLevelPart()].checkCollision(players[i].position))
             {
                 //CRASH
-                players[i].crash();
+                players[i].crash(camera.position);
                 setTimeout(() => {
                     restartLevel();
                 }, 1000);
@@ -175,7 +175,7 @@ function render(time)
             score = Math.max(Math.floor(topHeight)*-1,score);
         }
         else
-        {
+        {    
             deadPlayers++;
         }
     }

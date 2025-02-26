@@ -6,7 +6,7 @@ var viewBox = svg.viewBox.baseVal;
 var camera = document.getElementById("Level");
     camera.velocity = {x:0,y:0};
     camera.position = {x:0,y:0};
-    camera.targetOffset = {x:viewBox.width/2,y:-500};
+    camera.targetOffset = {x:viewBox.width/2,y:-100};
 
 var highScoreLabel = document.getElementById("Highscore");
 var scoreLabel = document.getElementById("Score");
@@ -181,7 +181,7 @@ function render(time)
     //UPDATE CAMERA
     camera.velocity.y = (camera.target.position.y-camera.position.y-camera.targetOffset.y)/(2);
     camera.velocity.x = ((camera.target.position.x-camera.position.x-camera.targetOffset.x))/4;
-    camera.position.y += ( Math.min(camera.position.y + camera.velocity.y*dt,0)-camera.position.y)/10;
+    camera.position.y += ( Math.min(camera.position.y + camera.velocity.y*dt,20)-camera.position.y)/10;
     camera.position.x +=   (camera.velocity.x-camera.position.x)/10;
     camera.setAttribute("transform","translate("+(-camera.position.x)+","+(-camera.position.y)+")");
 

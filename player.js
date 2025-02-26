@@ -118,8 +118,6 @@ class Player{
         this.deadBody.position.x += this.velocity.x*0.95;
         this.deadBody.position.y += this.velocity.y;
 
-        console.log(this.deadBody.scale)
-        
         this.deadBody.setAttribute("transform","translate("+this.deadBody.position.x+","+this.deadBody.position.y+"),rotate("+this.deadBody.rotation+"),scale("+this.deadBody.scale+")");
 
         if(this.deadBody.position.y>200)//OUT OF SCREEN

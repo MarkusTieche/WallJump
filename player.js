@@ -2,7 +2,7 @@ class Player{
   
     constructor(Position,Index) 
     {
-        this.gravity = 1;
+        this.gravity = 1.5;
         this.halfSize = 98/2;
         this.onWall = 0;
         this.body = document.getElementById("Player").cloneNode(true);
@@ -36,35 +36,39 @@ class Player{
 
     move(DirectionX)
     {
-        this.velocity.y  =-20;
-        this.velocity.x  =25*DirectionX;
+        if(this.onWall)
+        {
+            console.log("jj")
+            this.velocity.x  =30*DirectionX;
+            this.velocity.y = -20
+        }
     }
 
 
     update()
     {
         this.velocity.y += this.gravity;
-        if(this.position.y+this.velocity.y >= -this.halfSize)
+
+        if(this.position.x <= 768/2-230 || this.position.x >= 768/2+230)
         {
-            this.position.y = -this.halfSize;
-            this.velocity.y = 0;
+            this.onWall = 1;
+            this.velocity.y = -20;
+        }
+        else
+        {
+            this.onWall = 0;
+            if(this.position.y+this.velocity.y >= -this.halfSize)//OnGround
+            {
+                this.position.y = -this.halfSize;
+                this.velocity.y = 0;
+                this.onWall = 1;
+            }
         }
         
         this.position.x += this.velocity.x*dt;
         this.position.x = Math.min(Math.max(this.position.x, 768/2-230), 768/2+230);
         this.position.y += this.velocity.y*dt;
 
-
-        if(this.position.x <= 768/2-230 || this.position.x >= 768/2+230)
-        {
-            this.gravity = 0.1;
-            this.onWall = 1;
-        }
-        else
-        {
-            this.gravity = 1;
-            this.onWall = 0;
-        }
 
         this.body.setAttribute("transform","translate("+this.position.x+","+this.position.y+")");
 

@@ -14,7 +14,7 @@ var highScoreLine;
 
 var players = [];
 var level = [];
-
+var input = {"left":0,"right":0};
 var highScore = 0;
 var score = 0;
 var lastHighscore = 0;
@@ -112,10 +112,23 @@ function restartLevel()
 //INPUT
 document.addEventListener('keydown', function(event) {
     if(event.keyCode == 37) {
-        players[0].move(-1)
+        // players[0].move(-1)
+        input.left = -1;
     }
     else if(event.keyCode == 39) {
-        players[0].move(1)
+        // players[0].move(1)
+        input.right = 1;
+    }
+});
+
+document.addEventListener('keyup', function(event) {
+    if(event.keyCode == 37) {
+        // players[0].move(-1)
+        input.left = 0;
+    }
+    else if(event.keyCode == 39) {
+        // players[0].move(1)
+        input.right = 0;
     }
 });
 
@@ -125,6 +138,10 @@ function render(time)
     lastTick = time;
 
     //UPDATE PLAYERS
+    if(input.left||input.right)
+    {
+        players[0].move(input.left||input.right)
+    }
     var deadPlayers = 0;
     var topHeight = 0;
     for (let i = 0; i < players.length; i++) {

@@ -22,6 +22,7 @@ var playerCount = 1;
 var paused = false;
 var levelLimit = -20000;
 var currentLevel = 1;
+var gameStarted = false;
 
 function init()
 {
@@ -82,6 +83,8 @@ function restartLevel()
     score = 0;
     highScoreLabel.innerHTML = "Best: "+highScore*-1;
     highScoreLine.setAttribute("transform","translate(0,"+(+highScore-98)+")");
+    gameStarted = false;
+    document.getElementById("Input").style.visibility = "visible";
     
     camera.target = players[0];
     // paused = false;
@@ -135,6 +138,12 @@ function render(time)
     //UPDATE PLAYERS
     if(input.left||input.right)
     {
+        if(!gameStarted)
+        {
+            gameStarted = true;
+            document.getElementById("Input").style.visibility = "hidden";
+        }
+
         players[0].move(input.left||input.right)
     }
    

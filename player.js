@@ -7,6 +7,8 @@ class Player{
         this.onWall = 0;
         this.body = document.getElementById("Player").cloneNode(true);
         this.body.setAttribute("fill", "#"+Math.floor(Math.random()*16777215).toString(16));//RANDOM COLOR1
+        this.eyes = this.body.getElementsByTagName('circle');
+        this.eyesPosition = {"leftX":Number(this.eyes[0].getAttribute("cx")),"rightX":Number(this.eyes[1].getAttribute("cx"))};
         this.index = Index;
         this.reset(Position);
     }
@@ -21,12 +23,14 @@ class Player{
         this.lastRecord = 0;
         this.topPosition = 0;
         this.body.style.opacity = 1;
+        this.moveEyes(0);
     }
 
     crash()
     {
         this.body.style.opacity = 0.4;
         this.alive = false;
+        this.onWall = 0;
     }
 
     getLevelPart()
@@ -38,10 +42,16 @@ class Player{
     {
         if(this.onWall)
         {
-            console.log("jj")
+            this.moveEyes(DirectionX*-1)
             this.velocity.x  =30*DirectionX;
             this.velocity.y = -20
         }
+    }
+
+    moveEyes(DirectionX)
+    {
+        this.eyes[0].setAttribute("cx", this.eyesPosition.leftX-10*DirectionX)
+        this.eyes[1].setAttribute("cx", this.eyesPosition.rightX-10*DirectionX)
     }
 
 

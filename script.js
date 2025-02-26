@@ -142,6 +142,7 @@ function render(time)
     {
         players[0].move(input.left||input.right)
     }
+   
     var deadPlayers = 0;
     var topHeight = 0;
     for (let i = 0; i < players.length; i++) {

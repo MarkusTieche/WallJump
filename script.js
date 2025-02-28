@@ -19,8 +19,7 @@ var highScore = 0;
 var score = 0;
 var lastHighscore = 0;
 var playerCount = 1;
-var paused = false;
-var levelLimit = -20000;
+var levelLimit = -5000;
 var currentLevel = 1;
 var gameStarted = false;
 
@@ -31,9 +30,7 @@ function init()
     }
 
     highScoreLine =  document.getElementById("highScoreLine");
-    highScoreLine.setAttribute("transform","translate(0,"+(200)+")");
     highScore = 0;
-    document.getElementById("goal").setAttribute("transform","translate(0,"+(levelLimit)+")");
     document.getElementById("goal").style.opacity = 0.6;
 
     createLevel(100);
@@ -58,11 +55,13 @@ function resetLevel()
     level = [];
     createLevel(100);
     restartLevel();
+    highScoreLine.setAttribute("transform","translate(0,"+0+")");
 }
 
 function createLevel(PartCount)
 {
     var stepSize = -1280;
+    document.getElementById("goal").setAttribute("transform","translate(0,"+(levelLimit)+")");
     for (let i = 0; i < PartCount; i++) 
     {
         var newLevelPart = new LevelPart({x:0,y:stepSize*i});
@@ -82,18 +81,26 @@ function restartLevel()
 {
     score = 0;
     highScoreLabel.innerHTML = "Best: "+highScore*-1;
-    highScoreLine.setAttribute("transform","translate(0,"+(+highScore-98)+")");
+    document.getElementById("labelHighscore").innerHTML =  "HIGHSCORE: "+highScore*-1
     gameStarted = false;
     document.getElementById("Input").style.visibility = "visible";
+    document.getElementById("Black").style.visibility ="hidden";
     
     camera.target = players[0];
-    // paused = false;
+    
     for (let i = 0; i < players.length; i++)
     {
         players[i].reset({x:768/2,y:0})
     } 
-
+        
+    highScoreLine.setAttribute("transform","translate(0,"+(+highScore-98)+")");
     camera.position = {x:0,y:camera.targetOffset.y};
+}
+
+function levelFinished()
+{
+    levelLimit -= 5000;
+    resetLevel();
 }
 
 function setCamera(target)
@@ -158,6 +165,7 @@ function render(time)
             if(level[players[i].getLevelPart()].checkCollision(players[i].position))
             {
                 //CRASH
+                document.getElementById("Black").style.visibility ="visible"
                 players[i].crash(camera.position);
                 setTimeout(() => {
                     restartLevel();
@@ -169,6 +177,15 @@ function render(time)
             {
                 topHeight = players[i].topPosition;
                 camera.target = players[i];
+            }
+
+            //LEVEL FINISHED
+            if(players[i].topPosition < levelLimit)
+            {
+                players[i].finish(camera.position);
+                setTimeout(() => {
+                    levelFinished();
+                }, 1000);
             }
 
             highScore = Math.floor(Math.min(highScore,players[i].position.y+players[i].halfSize))

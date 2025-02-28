@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
 
-  <title>AI Game</title>
+  <title>WallJump</title>
   <meta name="viewport" content="width=device-width,user-scalable=no">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -21,7 +21,7 @@
 	.st3{display:inline;}
 	.st4{display:inline;fill:#F2F2F2;}
 	.st5{fill:#F14950}
-	.st6{fill:#29ABE2;stroke:#A67C52;stroke-width:6;stroke-miterlimit:10;}
+	.st6{fill:#29ABE2;stroke:#A67C52;stroke-width:10;stroke-miterlimit:10;}
 	.st7{fill:#A67C52;}
 	.st8{fill:#C69C6D;}
 	.st9{fill:#B3B3B3;}
@@ -41,6 +41,7 @@
 	.st23{display:inline;fill:#1A1A1A;}
 	.st24{fill:none;stroke:#000000;stroke-width:8;stroke-miterlimit:10;}
 	.heavy { font: bold 80px sans-serif;fill:black;}
+	.light { font: bold 40px sans-serif;fill:black;}
 </style>
 <pattern id="pattern-checkers" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
     <!-- Two instances of the same checker, only positioned apart on the `x` and `y` axis -->
@@ -66,13 +67,17 @@
 </g>
 <g id="Level">
 	<text id="labelLevel" x="50%" y="-800" dominant-baseline="middle" text-anchor="middle" class="heavy">LEVEL 1</text>
-	<rect id="highScoreLine" x="-116" y="-9.5"  width="1000" height="20" fill="url(#diagonalHatch)"/>
+	<g id="highScoreLine">
+		<rect id="Line" x="-116" y="0"  width="1000" height="20" fill="url(#diagonalHatch)"/>
+		<text id="labelHighscore" x="50%" y="50" dominant-baseline="middle" text-anchor="middle" class="light">HIGHSCORE:300</text>
+	</g>
 	<g id="ground">
 		<rect id="g2" x="-247" y="-8" class="st0" width="1262" height="884"/>
 		<rect id="g1" x="-247" y="-8" class="st1" width="1262" height="17"/>
 	</g>
 	<rect id="goal" x="-116" y="-33" width="1000" height="67" fill="url(#pattern-checkers)"/>
 </g>
+<rect id="Black" x="-1000" y="-2000"  width="2000" height="4000" fill="#000" style="opacity:0.3; visibility:hidden;"/>
 <g id="deadPlayer">
 	
 </g>

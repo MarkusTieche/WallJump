@@ -29,10 +29,12 @@ class Player{
         this.topPosition = 0;
         this.body.style.opacity = 1;
         this.moveEyes(0);
+        this.body.style.visibility = "visible";
     }
 
     crash(cameraPosition)
     {
+        this.moveEyes(0);
         this.state = "dead";
         this.deadBody = document.getElementById("deadPlayer").appendChild(this.body.cloneNode(true));
         this.deadBody.position={x:(this.position.x-cameraPosition.x),y:(this.position.y-cameraPosition.y)};
@@ -44,6 +46,12 @@ class Player{
         this.body.style.opacity = 0.4;
         this.alive = false;
         this.onWall = 0;
+    }
+
+    finish(cameraPosition)
+    {
+        this.crash(cameraPosition);
+        this.body.style.visibility = "hidden";
     }
 
     getLevelPart()
@@ -101,11 +109,6 @@ class Player{
         {
             this.lastRecord = 0;
             this.topPosition =topPosition
-        }
-
-        if(this.topPosition < levelLimit)
-        {
-            this.crash()
         }
     }
 

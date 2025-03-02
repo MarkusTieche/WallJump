@@ -33,7 +33,7 @@ function init()
     highScore = 0;
     document.getElementById("goal").style.opacity = 0.6;
 
-    createLevel(100);
+    createLevel(Math.ceil((levelLimit*-1)/1280));
 
     camera.target = players[0];
     animate();
@@ -49,11 +49,11 @@ function resetLevel()
     {
         if(levelPart.active)
         {
-            document.getElementById("Level").removeChild(levelPart.group)
+            document.getElementById("Level").removeChild(levelPart.group);
         }
     }
     level = [];
-    createLevel(100);
+    createLevel(Math.ceil((levelLimit*-1)/1280));
     restartLevel();
     highScoreLine.setAttribute("transform","translate(0,"+0+")");
 }
@@ -86,15 +86,14 @@ function restartLevel()
     document.getElementById("Input").style.visibility = "visible";
     document.getElementById("Black").style.visibility ="hidden";
     
-    camera.target = players[0];
-    
     for (let i = 0; i < players.length; i++)
     {
-        players[i].reset({x:768/2,y:0})
+        players[i].reset({x:768/2,y:0});
     } 
-        
-    highScoreLine.setAttribute("transform","translate(0,"+(+highScore-98)+")");
+
+    camera.target = players[0];
     camera.position = {x:0,y:camera.targetOffset.y};
+    highScoreLine.setAttribute("transform","translate(0,"+(+highScore-98)+")");
 }
 
 function levelFinished()
@@ -109,7 +108,6 @@ function setCamera(target)
     camera.velocity.x = ((target.x-camera.position.x-camera.targetOffset.x))/4;
     camera.position.y += ( Math.min(camera.position.y + camera.velocity.y*dt,20)-camera.position.y)/10;
     camera.position.x +=   (camera.velocity.x-camera.position.x)/10;
-    
         
     camera.setAttribute("transform","translate("+(-camera.position.x)+","+(-camera.position.y)+")");
 }
@@ -182,7 +180,7 @@ function render(time)
                 players[i].crash(camera.position);
                 setTimeout(() => {
                     restartLevel();
-                }, 2000);
+                }, 1000);
             }
 
             //TOP POSITION

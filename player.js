@@ -68,8 +68,8 @@ class Player{
         if(this.onWall)
         {
             this.moveEyes(DirectionX*-1)
-            this.velocity.x  =30*DirectionX;
-            this.velocity.y = -20
+            this.velocity.x  = 30*DirectionX;
+            this.velocity.y = -20;
         }
     }
 

@@ -21,7 +21,11 @@ class Player{
         this.state = "alive";
         this.position = {x:Position.x,y:Position.y-this.halfSize};
         this.onWall = 0;
-        this.deadBody = null;
+        if(this.deadBody)
+        {
+            document.getElementById("deadPlayer").removeChild(this.deadBody)
+            this.deadBody = null;
+        }
         this.velocity = {x:0,y:0};
         this.body.setAttribute("transform","translate("+this.position.x+","+this.position.y+")");
         this.alive = true;
@@ -127,6 +131,7 @@ class Player{
         {
             this.state = "noUpdate";
             document.getElementById("deadPlayer").removeChild(this.deadBody)
+            this.deadBody = null;
         }
     }
 

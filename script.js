@@ -14,7 +14,7 @@ var highScoreLine;
 
 var players = [];
 var level = [];
-var input = {"left":0,"right":0};
+var input = 0; //left:-1 , right:1:
 var highScore = 0;
 var score = 0;
 var lastHighscore = 0;
@@ -115,25 +115,38 @@ function setCamera(target)
 }
 
 //INPUT
+document.addEventListener('touchstart', function(event) 
+{
+    event.preventDefault();
+    if(event.touches[0].pageX<window.innerWidth/2)
+    {input = -1;}else{input =1;};
+})
+
+document.addEventListener('touchend', function(event) 
+{
+    event.preventDefault();
+    input = 0;
+})
+
 document.addEventListener('keydown', function(event) {
     if(event.keyCode == 37) {
         // players[0].move(-1)
-        input.left = -1;
+        input = -1;
     }
-    else if(event.keyCode == 39) {
+    if(event.keyCode == 39) {
         // players[0].move(1)
-        input.right = 1;
+        input = 1;
     }
 });
 
 document.addEventListener('keyup', function(event) {
     if(event.keyCode == 37) {
         // players[0].move(-1)
-        input.left = 0;
+        input = 0;
     }
-    else if(event.keyCode == 39) {
+    if(event.keyCode == 39) {
         // players[0].move(1)
-        input.right = 0;
+        input = 0;
     }
 });
 
@@ -143,7 +156,7 @@ function render(time)
     lastTick = time;
 
     //UPDATE PLAYERS
-    if(input.left||input.right)
+    if(input)
     {
         if(!gameStarted)
         {
@@ -151,7 +164,7 @@ function render(time)
             document.getElementById("Input").style.visibility = "hidden";
         }
 
-        players[0].move(input.left||input.right)
+        players[0].move(input)
     }
    
     var deadPlayers = 0;
@@ -169,7 +182,7 @@ function render(time)
                 players[i].crash(camera.position);
                 setTimeout(() => {
                     restartLevel();
-                }, 1000);
+                }, 2000);
             }
 
             //TOP POSITION

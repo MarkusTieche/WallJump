@@ -2,9 +2,8 @@ class Level{
   
     constructor() 
     {
-        this.highScoreLabel = document.getElementById("Highscore");
-        this.scoreLabel = document.getElementById("Score");
         this.highScoreLine = document.getElementById("highScoreLine");
+        this.progress = document.getElementById("progress");
 
         this.players = [];
         this.levelParts = [];
@@ -54,8 +53,6 @@ class Level{
 
     restartLevel()
     {
-        this.score = 0;
-        this.highScoreLabel.innerHTML = "Best: " + this.highScore * -1;
         document.getElementById("labelHighscore").innerHTML = "HIGHSCORE: " + this.highScore * -1
         this.gameStarted = false;
         document.getElementById("Input").style.visibility = "visible";
@@ -75,7 +72,9 @@ class Level{
     finishLevel()
     {
         this.currentLevel++;
-        this.levelLimit -= 5000;
+        document.getElementById("progressStart").innerHTML = (this.currentLevel-1);
+        document.getElementById("progressEnd").innerHTML = (this.currentLevel);
+        this.levelLimit = -5000 + (this.currentLevel*-1280);
         this.createLevel(Math.ceil((this.levelLimit * -1) / 1280));
         this.restartLevel();
     }
@@ -90,6 +89,7 @@ class Level{
         var player = new Player(Position, index, Color);
         this.players.push(player);
         document.getElementById("Level").appendChild(player.body);
+        this.progress.style.backgroundColor = Color;
     }
 
     update()
@@ -107,7 +107,6 @@ class Level{
                     this.players[i].crash(camera.position);
                     setTimeout(() => {
                         this.restartLevel();
-                 
                    }, 1000);
                 }
 
@@ -124,15 +123,14 @@ class Level{
                         this.finishLevel();
                     }, 1000);
                 }
-
+                
+                this.progress.style.left = (topHeight / this.levelLimit) * 120 + "px";
                 this.highScore = Math.floor(Math.min(this.highScore, this.players[i].position.y + this.players[i].halfSize))
-                this.score = Math.max(Math.floor(topHeight) * -1, this.score);
             }
             else {
                 deadPlayers++;
             }
         }
-        this.scoreLabel.innerHTML = Math.floor(this.score);
         
         //UPDATE CAMERA
         setCamera(camera.target.position)

@@ -20,6 +20,7 @@ class Player{
     {
         this.state = "alive";
         this.position = {x:Position.x,y:Position.y-this.halfSize};
+        this.rotation = 0;
         this.onWall = 0;
         if(this.deadBody)
         {
@@ -70,6 +71,7 @@ class Player{
             this.moveEyes(DirectionX*-1)
             this.velocity.x  = 30*DirectionX;
             this.velocity.y = -20;
+            this.rotation = 30 * DirectionX;
         }
     }
 
@@ -87,6 +89,7 @@ class Player{
         {
             this.onWall = 1;
             this.velocity.y = -20;
+            this.rotation = 0;
         }
         else
         {
@@ -104,7 +107,7 @@ class Player{
         this.position.y += this.velocity.y*dt;
 
 
-        this.body.setAttribute("transform","translate("+this.position.x+","+this.position.y+")");
+        this.body.setAttribute("transform", "translate(" + this.position.x + "," + this.position.y + "),rotate(" + this.rotation +")");
 
         var topPosition = Math.min(this.topPosition,this.position.y+this.halfSize);
 

@@ -33,7 +33,6 @@ class Level{
         
         this.highScore = 98;
         this.highScoreLine.setAttribute("transform", "translate(0," + (+this.highScore - 98) + ")");
-        document.getElementById("labelHighscore").innerHTML = "HIGHSCORE: " + this.highScore * -1
         
         //REMOVE LEFTOVER LEVELPARTS
         for (let levelPart of this.levelParts) {
@@ -53,7 +52,6 @@ class Level{
 
     restartLevel()
     {
-        document.getElementById("labelHighscore").innerHTML = "HIGHSCORE: " + this.highScore * -1
         this.gameStarted = false;
         document.getElementById("Input").style.visibility = "visible";
         document.getElementById("Black").style.visibility = "hidden";

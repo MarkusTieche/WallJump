@@ -20,7 +20,8 @@ class LevelPart{
         {
             var random = Math.ceil(Math.random()*3)
             var Bg = document.getElementById("BG_"+random).cloneNode(true);
-            Bg.setAttribute("transform","translate(0,"+(-200-Math.random()*400)+") scale("+Math.sign(Math.random()-0.5)+",1)");
+            // Bg.setAttribute("transform","translate(0,"+(-200-Math.random()*400)+") scale("+Math.sign(Math.random()-0.5)+",1)");
+            Bg.setAttribute("transform","translate(0,"+(-200-Math.random()*400)+") scale(1,1)");
             this.group.appendChild(Bg);
         }
 

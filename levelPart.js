@@ -92,7 +92,7 @@ class LevelPart{
     {   
         if(!this.active)
         {
-            document.getElementById("Level").appendChild(this.group);
+            document.getElementById("levelParts").appendChild(this.group);
             this.active = true;
         }
     }
@@ -101,7 +101,7 @@ class LevelPart{
     {
         if(this.active)
         {
-            document.getElementById("Level").removeChild(this.group)
+            document.getElementById("levelParts").removeChild(this.group)
             this.active = false;
         }
     }

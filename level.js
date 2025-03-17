@@ -6,7 +6,6 @@ class Level{
         this.progress = document.getElementById("progress");
 
         this.players = [];
-        this.playerParticles = new particleSystem(document.getElementById("particles"), document.getElementById("particle"),20);
         this.levelParts = [];
         this.highScore = 0;
         this.score = 0;
@@ -85,7 +84,7 @@ class Level{
 
     addPlayer(Position, index, Color)
     {
-        var player = new Player(Position, index, Color,this.playerParticles);
+        var player = new Player(Position, index, Color);
         this.players.push(player);
         document.getElementById("players").appendChild(player.body);
         this.progress.style.backgroundColor = Color;
@@ -97,7 +96,6 @@ class Level{
         var topHeight = 0;
         for (let i = 0; i < this.players.length; i++) {
             this.players[i].update();
-            this.playerParticles.update();
 
             if (this.players[i].alive) {
                 //COLLISION

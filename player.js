@@ -1,6 +1,6 @@
 class Player{
   
-    constructor(Position,Index,Color,particleSystem) 
+    constructor(Position,Index,Color) 
     {
         this.state = "alive";
         this.states ={"alive":this.updateAlive,"dead":this.updateDead,"noUpdate":this.noUpdate}
@@ -14,8 +14,6 @@ class Player{
         this.eyesPosition = {"leftX":Number(this.eyes[0].getAttribute("cx")),"rightX":Number(this.eyes[1].getAttribute("cx"))};
         this.index = Index;
         this.reset(Position);
-        this.particleSystem = particleSystem;
-        this.particleTime = 40;
     }
 
     reset(Position)
@@ -86,19 +84,12 @@ class Player{
     updateAlive()
     {
         this.velocity.y += this.gravity;
-        this.particleTime -=1;
 
         if(this.position.x <= 768/2-230 || this.position.x >= 768/2+230)
         {
             this.onWall = 1;
             this.velocity.y = -20;
             this.rotation = 0;
-            if(this.particleTime <= 0)
-            {
-                
-                this.particleSystem.spawn({ life: 15,radius:30*Math.random()+0.5, scale: { start: 1.6, end: .5 }, position: { x: this.position.x + (this.halfSize -5)* Math.sign(this.position.x - 768 / 2), y:this.position.y+20 } });
-                this.particleTime = 4;
-            }
         }
         else
         {

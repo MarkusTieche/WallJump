@@ -47,7 +47,7 @@ class Player{
         this.deadBody.scale = 1;
         this.deadBody.setAttribute("transform","translate("+this.deadBody.position.x+","+this.deadBody.position.y+")");
         this.velocity.y = Math.min(this.velocity.y,-20)
-        this.velocity.x = this.velocity.x/10;
+        this.velocity.x = this.velocity.x/2.5;
         this.body.style.opacity = 0.4;
         this.alive = false;
         this.onWall = 0;
@@ -122,11 +122,11 @@ class Player{
     updateDead()
     {
 
-        this.velocity.y += this.gravity/2;
-        this.deadBody.rotation +=2;
+        this.velocity.y += this.gravity;
+        this.deadBody.rotation +=4*dt;
         this.deadBody.scale =Math.min(this.deadBody.scale+0.015,1.8);
-        this.deadBody.position.x += this.velocity.x*0.95;
-        this.deadBody.position.y += this.velocity.y;
+        this.deadBody.position.x += (this.velocity.x*0.98)*dt;
+        this.deadBody.position.y += this.velocity.y*dt;
 
         this.deadBody.setAttribute("transform","translate("+this.deadBody.position.x+","+this.deadBody.position.y+"),rotate("+this.deadBody.rotation+"),scale("+this.deadBody.scale+")");
 

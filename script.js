@@ -15,7 +15,7 @@ var currentLevel
 
 function init()
 {
-    currentLevel = new Level();
+    currentLevel = new Level(1);
     addInput();
     animate();
 }

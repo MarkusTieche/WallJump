@@ -1,6 +1,6 @@
 class Level{
   
-    constructor() 
+    constructor(playerCount = 1) 
     {
         this.highScoreLine = document.getElementById("highScoreLine");
         this.progress = document.getElementById("progress");
@@ -10,7 +10,7 @@ class Level{
         this.highScore = 0;
         this.score = 0;
         this.lastHighscore = 0;
-        this.playerCount = 1;
+        this.playerCount = playerCount;
         this.levelLimit = -5000;
         this.currentLevel = 1;
         this.gameStarted = false;

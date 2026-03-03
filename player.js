@@ -37,12 +37,12 @@ class Player{
         this.body.style.visibility = "visible";
     }
 
-    crash(cameraPosition)
+    crash()
     {
         this.moveEyes(0);
         this.state = "dead";
         this.deadBody = document.getElementById("deadPlayer").appendChild(this.body.cloneNode(true));
-        this.deadBody.position={x:(this.position.x-cameraPosition.x),y:(this.position.y-cameraPosition.y)};
+        this.deadBody.position={x:(this.position.x),y:(this.position.y)};
         this.deadBody.rotation = 0;
         this.deadBody.scale = 1;
         this.deadBody.setAttribute("transform","translate("+this.deadBody.position.x+","+this.deadBody.position.y+")");
@@ -53,9 +53,9 @@ class Player{
         this.onWall = 0;
     }
 
-    finish(cameraPosition)
+    finish()
     {
-        this.crash(cameraPosition);
+        this.crash();
         this.body.style.visibility = "hidden";
     }
 
@@ -130,7 +130,7 @@ class Player{
 
         this.deadBody.setAttribute("transform","translate("+this.deadBody.position.x+","+this.deadBody.position.y+"),rotate("+this.deadBody.rotation+"),scale("+this.deadBody.scale+")");
 
-        if(this.deadBody.position.y>200)//OUT OF SCREEN
+        if (this.position.y - this.deadBody.position.y<-150)//OUT OF SCREEN
         {
             this.state = "noUpdate";
             document.getElementById("deadPlayer").removeChild(this.deadBody)

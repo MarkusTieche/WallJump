@@ -3,11 +3,6 @@ var dt = 0;
 let svg = document.querySelector('svg');
 var viewBox = svg.viewBox.baseVal;
 
-var camera = document.getElementById("Level");
-    camera.velocity = {x:0,y:0};
-    camera.position = {x:0,y:-100};
-    camera.targetOffset = {x:viewBox.width/2,y:-100};
-
 var input = 0; //left:-1 , right:1:
 var gameStarted = false;
 
@@ -18,16 +13,6 @@ function init()
     currentLevel = new Level(1);
     addInput();
     animate();
-}
-
-function setCamera(target)
-{
-    camera.velocity.y = (target.y-camera.position.y-camera.targetOffset.y)/(2);
-    camera.velocity.x = ((target.x-camera.position.x-camera.targetOffset.x))/4;
-    camera.position.y += ( Math.min(camera.position.y + camera.velocity.y*dt,20)-camera.position.y)/10;
-    camera.position.x +=   (camera.velocity.x-camera.position.x)/10;
-        
-    camera.setAttribute("transform","translate("+(-camera.position.x)+","+(-camera.position.y)+")");
 }
 
 function addInput()
@@ -83,7 +68,7 @@ function render(time)
         currentLevel.players[0].move(input);
     }
 
-    currentLevel.update()
+    currentLevel.update(dt)
 }
 
 function animate(){

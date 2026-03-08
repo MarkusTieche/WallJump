@@ -5,6 +5,7 @@ class Level{
         this.highScoreLine = document.getElementById("highScoreLine");
         this.progress = document.getElementById("progress");
 
+        this.camera = new Camera()
         this.players = [];
         this.levelParts = [];
         this.highScore = 0;
@@ -21,7 +22,7 @@ class Level{
 
         this.createLevel(Math.ceil((this.levelLimit * -1) / 1280));
 
-        camera.target = this.players[0];
+        this.camera.target = this.players[0];
     }
 
     createLevel(PartCount)
@@ -46,7 +47,6 @@ class Level{
         for (let i = 0; i < PartCount; i++) {
             var newLevelPart = new LevelPart({ x: 0, y: stepSize * i });
             this.levelParts.push(newLevelPart);
-            newLevelPart.isVisible();
         }
     }
 
@@ -60,8 +60,7 @@ class Level{
             this.players[i].reset({ x: 768 / 2, y: 0 });
         }
 
-        camera.target = this.players[0];
-        camera.position = { x: 0, y: camera.targetOffset.y };
+        this.camera.reset()
         this.highScoreLine.setAttribute("transform", "translate(0," + (+this.highScore - 98) + ")");
 
         gameStarted = false;
@@ -90,7 +89,7 @@ class Level{
         this.progress.style.backgroundColor = Color;
     }
 
-    update()
+    update(dt)
     {
         var deadPlayers = 0;
         var topHeight = 0;
@@ -102,7 +101,7 @@ class Level{
                 if (this.levelParts[this.players[i].getLevelPart()].checkCollision(this.players[i].position)) {
                     //CRASH
                     document.getElementById("Black").style.visibility = "visible"
-                    this.players[i].crash(camera.position);
+                    this.players[i].crash();
                     setTimeout(() => {
                         this.restartLevel();
                    }, 1000);
@@ -111,12 +110,12 @@ class Level{
                 //TOP POSITION
                 if (this.players[i].topPosition <= topHeight) {
                     topHeight = this.players[i].topPosition;
-                    camera.target = this.players[i];
+                    this.camera.target = this.players[i];
                 }
 
                 //LEVEL FINISHED
                 if (this.players[i].topPosition < this.levelLimit) {
-                    this.players[i].finish(camera.position);
+                    this.players[i].finish();
                     setTimeout(() => {
                         this.finishLevel();
                     }, 1000);
@@ -131,11 +130,11 @@ class Level{
         }
         
         //UPDATE CAMERA
-        setCamera(camera.target.position)
+        this.camera.update(dt);
         
         //UPDATE LEVEL
         for (let i = 0; i < this.levelParts.length; i++) {
-            this.levelParts[i].isVisible();
+            this.levelParts[i].isVisible(this.camera);
         }
     }
 }

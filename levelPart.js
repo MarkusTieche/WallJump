@@ -76,9 +76,9 @@ class LevelPart{
        return this.spikes[closest];
     }
 
-    isVisible()
+    isVisible(Camera)
     {
-        if(Math.sqrt((camera.position.y - this.position.y)*(camera.position.y - this.position.y))<1600)
+        if (Math.sqrt((Camera.position.y - this.position.y) * (Camera.position.y - this.position.y))<1600)
         {
             this.show()
         }
